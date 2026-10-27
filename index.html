@@ -745,11 +745,23 @@
 .floating-social {
     position: fixed;
     right: 64px;
-    bottom: 220px;
+    bottom: 182px;
     z-index: 250;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.92);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s linear 0.45s;
+}
+.floating-social.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s linear 0s;
 }
     .social-icon {
         width: 44px; height: 44px;
@@ -777,25 +789,34 @@
     .cart-fab {
     position: fixed;
     right: 64px;
-    bottom: 148px;
+    bottom: 110px;
     width: 60px;
     height: 60px;
-        border-radius: 50%;
-        background:
-            linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.3) 100%),
-            linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
-        border: 1.5px solid rgba(180, 205, 240, 0.5);
-        color: var(--laser-halo);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 300;
-        box-shadow:
-            0 4px 24px rgba(0,0,0,0.6),
-            0 0 28px rgba(140, 180, 230, 0.3),
-            inset 0 1px 0 rgba(255,255,255,0.15);
-        transition: all 0.22s cubic-bezier(0.2, 0.9, 0.4, 1);
-    }
+    border-radius: 50%;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%, rgba(0,0,0,0.3) 100%),
+        linear-gradient(135deg, #1a2230 0%, #0a0e14 100%);
+    border: 1.5px solid rgba(180, 205, 240, 0.5);
+    color: var(--laser-halo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 300;
+    box-shadow:
+        0 4px 24px rgba(0,0,0,0.6),
+        0 0 28px rgba(140, 180, 230, 0.3),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.35s ease, visibility 0s linear 0.35s, border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+.cart-fab.is-visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.35s ease, visibility 0s linear 0s, border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
     .cart-fab:hover {
         border-color: var(--laser-halo);
         box-shadow:
@@ -842,7 +863,7 @@
     /* ── Toast ── */
     #cartToast {
     position: fixed;
-    bottom: 340px;
+    bottom: 302px;
     left: 50%;
         transform: translateX(-50%) translateY(16px);
         padding: 12px 22px;
@@ -1556,13 +1577,13 @@
         .site-footer { padding: 14px 16px 18px; }
 
              /* Stack: cart FAB at bottom, socials above */
-                .floating-social { right: 22px; bottom: 190px; gap: 10px; }
+                .floating-social { right: 22px; bottom: 158px; gap: 10px; }
         .social-icon { width: 40px; height: 40px; }
         .social-icon svg { width: 20px; height: 20px; }
-        .cart-fab { width: 54px; height: 54px; right: 22px; bottom: 124px; }
+       .cart-fab { width: 54px; height: 54px; right: 22px; bottom: 92px; }
         .cart-fab svg { width: 22px; height: 22px; }
         .cart-badge { min-width: 22px; height: 22px; font-size: 0.58rem; }
-        #cartToast { bottom: 300px; font-size: 0.58rem; padding: 10px 18px; }
+        #cartToast { bottom: 268px; font-size: 0.58rem; padding: 10px 18px; }
 
         .lightbox-img img { max-height: 46dvh; }
         .lightbox-top { padding: 14px 52px 14px 14px; }
@@ -3157,5 +3178,38 @@
   }
 })();
 </script>
+
+<script>
+/* Mostrar iconos flotantes solo cuando el hero sale de pantalla */
+(function () {
+    'use strict';
+    var hero = document.querySelector('.hero');
+    var floating = document.querySelector('.floating-social');
+    var cartFab = document.querySelector('.cart-fab');
+    if (!hero || !floating || !cartFab) return;
+
+    function setVisible(v) {
+        floating.classList.toggle('is-visible', v);
+        cartFab.classList.toggle('is-visible', v);
+    }
+
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                setVisible(!entry.isIntersecting);
+            });
+        }, { threshold: 0.2 });
+        io.observe(hero);
+    } else {
+        var onScroll = function () {
+            var heroBottom = hero.getBoundingClientRect().bottom;
+            setVisible(heroBottom < 40);
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+})();
+</script>
+
 </body>
 </html>
