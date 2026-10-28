@@ -53,7 +53,7 @@
     }
 
     html { scroll-behavior: smooth; }
-        body {
+    body {
         background:
             repeating-linear-gradient(90deg,
                 rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 1px,
@@ -146,8 +146,7 @@
             drop-shadow(0 14px 24px rgba(0,0,0,0.85));
     }
 
-       /* ACERO 430 — brushed steel plate with engraved text */
-      .hero-badge {
+    .hero-badge {
         position: relative;
         display: inline-flex;
         align-items: center;
@@ -196,7 +195,7 @@
         0%, 68%   { transform: translateX(-110%); }
         86%, 100% { transform: translateX(110%); }
     }
-      .hero-badge span,
+    .hero-badge span,
     .hero-badge strong {
         position: relative;
         z-index: 1;
@@ -278,7 +277,6 @@
         box-shadow: 0 0 26px rgba(255, 90, 90, 0.32);
     }
 
-    /* ORDER BUTTON */
     .btn-order {
         display: inline-flex;
         align-items: center;
@@ -313,7 +311,6 @@
     .btn-order:disabled { opacity: 0.5; pointer-events: none; }
     .cart-footer .btn-order { width: 100%; padding: 15px 22px; font-size: 0.82rem; }
 
-    /* ═══════════ SECTIONS ═══════════ */
     section#tarjetas, section#pedido {
         padding: clamp(80px, 10vw, 130px) clamp(20px, 4vw, 60px);
         position: relative;
@@ -452,7 +449,6 @@
         max-width: 48ch;
     }
 
-    /* ═══════════ WORKS ═══════════ */
     .works-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -635,7 +631,6 @@
         color: var(--muted);
     }
 
-    /* ═══════════ STEPS ═══════════ */
     .steps {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -693,13 +688,7 @@
         line-height: 1.65;
         color: var(--soft);
     }
-    .pedido-cta {
-        display: flex;
-        justify-content: center;
-        margin-top: clamp(32px, 5vw, 52px);
-    }
 
-    /* ═══════════ FOOTER ═══════════ */
     .site-footer {
         position: relative;
         background: #080a0e;
@@ -742,7 +731,6 @@
         50%      { opacity: 1;   transform: scale(1.25); }
     }
 
-    /* ═══════════ FLOATING ═══════════ */
     .floating-social {
         position: fixed;
         right: 64px;
@@ -890,7 +878,6 @@
     }
     #cartToast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-    /* ═══════════ CART DRAWER ═══════════ */
     #cartOverlay {
         position: fixed;
         inset: 0;
@@ -1201,7 +1188,6 @@
     }
     .cart-clear:hover { color: #ff8a8a; }
 
-    /* ─── Order form ─── */
     .order-form {
         display: flex;
         flex-direction: column;
@@ -1248,7 +1234,6 @@
     }
     .order-form .btn-save { width: 100%; }
 
-    /* ═══════════ MODALS ═══════════ */
     #lightbox, #adminOverlay, #confirmOverlay {
         position: fixed;
         inset: 0;
@@ -1317,7 +1302,6 @@
         padding: 24px;
         background: #0a0c10;
     }
-    /* IMAGEN CON OUTLINE EN EL PREVIEW */
     .lightbox-img img {
         max-width: 100%;
         max-height: 54dvh;
@@ -1392,7 +1376,6 @@
         color: var(--white);
     }
 
-    /* ═══════════ ORDER MODAL ═══════════ */
     #orderModal {
         position: fixed;
         inset: 0;
@@ -1545,7 +1528,6 @@
         filter: drop-shadow(0 1px 0 rgba(0,0,0,0.85)) drop-shadow(0 0 18px rgba(255, 90, 90, 0.4));
     }
 
-    /* ═══════════ ADMIN ═══════════ */
     .login-card {
         width: 100%; max-width: 400px;
         padding: 30px 28px;
@@ -1773,6 +1755,13 @@
         text-shadow: 0 0 18px var(--laser-glow);
         margin-top: 8px;
     }
+    .admin-cat-card .cat-price-badge {
+        font-family: 'Space Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 1px;
+        color: var(--soft);
+        margin-top: 2px;
+    }
 
     .admin-items-head {
         display: flex;
@@ -1803,6 +1792,49 @@
         letter-spacing: 1px;
         color: var(--white);
     }
+
+    /* Precio por categoría */
+    .admin-cat-price {
+        padding: 16px 20px;
+        margin-bottom: 18px;
+        background: rgba(255, 90, 90, 0.06);
+        border: 1px solid rgba(255, 90, 90, 0.28);
+        border-radius: var(--radius);
+    }
+    .admin-cat-price > label {
+        display: block;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 8px;
+    }
+    .admin-price-row {
+        display: flex;
+        gap: 8px;
+    }
+    .admin-price-row input {
+        flex: 1;
+        min-width: 0;
+        background: #171a20;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 10px 12px;
+        color: var(--white);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 500;
+        outline: none;
+        transition: 0.2s;
+    }
+    .admin-price-row input:focus {
+        border-color: rgba(255, 90, 90, 0.6);
+        box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.18);
+    }
+    .admin-price-row .btn-save { padding: 10px 18px; }
+
     .admin-grid { display: grid; grid-template-columns: 340px 1fr; gap: 20px; align-items: start; }
     .admin-form-card {
         padding: 22px;
@@ -1927,6 +1959,30 @@
         display: block;
         margin-top: 6px;
     }
+    .order-head-actions {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .order-del-btn {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: #24272f;
+        border: 1px solid var(--border);
+        color: var(--soft);
+        font-size: 0.82rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: 0.18s;
+    }
+    .order-del-btn:hover {
+        border-color: rgba(255, 77, 77, 0.55);
+        color: #ff8a8a;
+    }
     .order-status-select {
         background: #0f1116;
         border: 1px solid var(--border);
@@ -2036,8 +2092,19 @@
     }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
-    /* ═══════════ RESPONSIVE ═══════════ */
-    @media (max-width: 780px) { .admin-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 780px) {
+        .admin-grid { grid-template-columns: 1fr; }
+        #adminOverlay {
+            align-items: flex-start;
+            padding: 10px;
+        }
+        .admin-panel {
+            max-height: calc(100vh - 20px);
+            max-height: calc(100dvh - 20px);
+            padding: 20px;
+        }
+        .admin-cat-price { padding: 14px 16px; }
+    }
     @media (max-width: 720px) { .section-desc { text-align: left; } }
     @media (max-width: 640px) {
         .footer-inner {
@@ -2204,9 +2271,6 @@
             <p>Te escribimos para aprobar diseño y definir envío.</p>
         </div>
     </div>
-    <div class="pedido-cta reveal">
-        <button type="button" class="btn-order" id="sectionOrderBtn">Realizar pedido</button>
-    </div>
 </section>
 
 <!-- ═══════════ FOOTER ═══════════ -->
@@ -2345,6 +2409,15 @@
                 <button type="button" class="admin-back" id="backToCatsBtn">← Categorías</button>
                 <h4 id="adminCatTitle"></h4>
             </div>
+
+            <div class="admin-cat-price">
+                <label for="catPriceInput">Precio de esta categoría (ARS)</label>
+                <div class="admin-price-row">
+                    <input type="number" id="catPriceInput" min="0" step="500" inputmode="numeric" placeholder="18000">
+                    <button type="button" id="saveCatPriceBtn" class="btn-save">Guardar</button>
+                </div>
+            </div>
+
             <div class="admin-grid">
                 <div class="admin-form-card">
                     <h4 id="formTitle">Agregar pieza</h4>
@@ -2436,7 +2509,8 @@
     const FOLDER        = "laser";
     const KEY_ITEMS     = "laser_items_v1";
     const KEY_ORDERS    = "laser_orders_v1";
-    const KEY_PRICE     = "laser_price_v1";
+    const KEY_PRICE     = "laser_price_v1";       // legacy (single price, fallback)
+    const KEY_PRICES    = "laser_prices_v1";      // precios por categoría
 
     const LS_CART    = "gambito_laser_cart";
     const LS_SESSION = "gambito_admin_session";
@@ -2459,7 +2533,9 @@
 
     let items  = [];
     let orders = [];
-    let price  = DEFAULT_PRICE;
+    let prices = {};
+    CATS.forEach(c => { prices[c.id] = DEFAULT_PRICE; });
+    function priceOf(catId) { return prices[catId] || DEFAULT_PRICE; }
     let cart   = [];
     let editingId = null;
     let currentImg = "";
@@ -2541,11 +2617,21 @@
         const rawOrders = await loadContent(KEY_ORDERS, null);
         orders = Array.isArray(rawOrders) ? rawOrders : [];
 
-        const rawPrice = await loadContent(KEY_PRICE, null);
-        price = typeof rawPrice === "number" ? rawPrice : DEFAULT_PRICE;
+        const rawPrices = await loadContent(KEY_PRICES, null);
+        if (rawPrices && typeof rawPrices === "object") {
+            CATS.forEach(c => {
+                const p = Number(rawPrices[c.id]);
+                prices[c.id] = Number.isFinite(p) && p >= 0 ? p : DEFAULT_PRICE;
+            });
+        } else {
+            const legacy = await loadContent(KEY_PRICE, null);
+            const initial = (typeof legacy === "number" && legacy >= 0) ? legacy : DEFAULT_PRICE;
+            CATS.forEach(c => { prices[c.id] = initial; });
+        }
     }
-    function persistItems() { return saveContent(KEY_ITEMS, items); }
+    function persistItems()  { return saveContent(KEY_ITEMS, items); }
     function persistOrders() { return saveContent(KEY_ORDERS, orders); }
+    function persistPrices() { return saveContent(KEY_PRICES, prices); }
 
     function defaultItems() {
         return [
@@ -2571,7 +2657,7 @@
     }
     function saveCart() { try { localStorage.setItem(LS_CART, JSON.stringify(cart)); } catch (e) {} }
     function cartQty()   { return cart.reduce((s, i) => s + i.qty, 0); }
-    function cartTotal() { return cart.reduce((s, i) => { const it = items.find(x => x.id === i.id); return s + (it ? price * i.qty : 0); }, 0); }
+    function cartTotal() { return cart.reduce((s, i) => { const it = items.find(x => x.id === i.id); return s + (it ? priceOf(it.category) * i.qty : 0); }, 0); }
     function syncCart()  { cart = cart.filter(i => items.some(x => x.id === i.id)); }
 
     function badgePulse() {
@@ -2640,8 +2726,9 @@
         cart.forEach(i => {
             const it = items.find(x => x.id === i.id);
             if (!it) return;
+            const unit = priceOf(it.category);
             lines.push(n + ". " + it.title + " (" + catName(it.category) + ")");
-            lines.push("   " + i.qty + " × " + fmt(price) + " = " + fmt(price * i.qty));
+            lines.push("   " + i.qty + " × " + fmt(unit) + " = " + fmt(unit * i.qty));
             lines.push("");
             n++;
         });
@@ -2685,6 +2772,7 @@
         itemsEl.innerHTML = cart.map(i => {
             const it = items.find(x => x.id === i.id);
             if (!it) return "";
+            const unit = priceOf(it.category);
             return '' +
                 '<div class="cart-item">' +
                     '<div class="cart-item-img"><img src="' + esc(it.img) + '" alt="" loading="lazy" onerror="this.style.display=\'none\'"></div>' +
@@ -2698,7 +2786,7 @@
                         '</div>' +
                     '</div>' +
                     '<div class="cart-item-side">' +
-                        '<span class="cart-item-total">' + fmt(price * i.qty) + '</span>' +
+                        '<span class="cart-item-total">' + fmt(unit * i.qty) + '</span>' +
                         '<button type="button" class="cart-item-remove" data-remove="' + esc(it.id) + '">✕</button>' +
                     '</div>' +
                 '</div>';
@@ -2719,7 +2807,6 @@
         updateBadge(false);
     }
 
-    /* ─── ORDER MODAL ─── */
     function openOrderModal() {
         if (!cart.length) {
             toast("Agregá una pieza al carrito primero");
@@ -2745,14 +2832,15 @@
         const rows = cart.map(i => {
             const it = items.find(x => x.id === i.id);
             if (!it) return "";
-            const lineTotal = price * i.qty;
+            const unit = priceOf(it.category);
+            const lineTotal = unit * i.qty;
             total += lineTotal;
             return '' +
                 '<div class="order-summary-item">' +
                     '<img src="' + esc(it.img) + '" alt="" onerror="this.style.display=\'none\'">' +
                     '<div class="order-summary-info">' +
                         '<strong>' + esc(it.title) + '</strong>' +
-                        '<small>' + i.qty + ' × ' + fmt(price) + '</small>' +
+                        '<small>' + i.qty + ' × ' + fmt(unit) + '</small>' +
                     '</div>' +
                     '<span class="order-summary-total">' + fmt(lineTotal) + '</span>' +
                 '</div>';
@@ -2774,7 +2862,8 @@
 
         const orderItems = cart.map(i => {
             const it = items.find(x => x.id === i.id);
-            return { title: it ? it.title : "?", category: it ? it.category : "", qty: i.qty, img: it ? it.img : "" };
+            if (!it) return null;
+            return { title: it.title, category: it.category, qty: i.qty, img: it.img, unit: priceOf(it.category) };
         }).filter(Boolean);
 
         const newOrder = {
@@ -2826,7 +2915,7 @@
                         '<div class="work-body">' +
                             '<h3 class="work-title">' + esc(w.title) + '</h3>' +
                             (w.desc ? '<p class="work-desc">' + esc(w.desc) + '</p>' : '') +
-                            '<div class="work-price">' + fmt(price) + '<span>ARS</span></div>' +
+                            '<div class="work-price">' + fmt(priceOf(w.category)) + '<span>ARS</span></div>' +
                         '</div>' +
                     '</article>';
             }).join("");
@@ -2861,8 +2950,8 @@
         $("lbTitle").textContent = it.title || "";
         $("lbCategory").textContent = catName(it.category);
         $("lbDesc").textContent = it.desc || "";
-        $("lbPrice").textContent = fmt(price) + " ARS";
-        $("lbWa").href = waLink('Hola GAMBITO LÁSER, me interesa "' + it.title + '". ¿Disponible?');
+        $("lbPrice").textContent = fmt(priceOf(it.category)) + " ARS";
+        $("lbWa").href = waLink('Hola GAMBITO LÁSER, me interesa "' + it.title + '" (' + fmt(priceOf(it.category)) + '). ¿Disponible?');
         const addBtn = $("lbAdd");
         const inCart = cart.some(x => x.id === id);
         addBtn.classList.toggle("added", inCart);
@@ -2933,6 +3022,8 @@
         $("viewItems").style.display = "";
         $("viewOrders").style.display = "none";
         $("adminCatTitle").textContent = catName(catId);
+        const pi = $("catPriceInput");
+        if (pi) pi.value = priceOf(catId);
         resetForm();
         renderAdminItems();
     }
@@ -2941,6 +3032,19 @@
         $("viewItems").style.display = "none";
         $("viewOrders").style.display = "";
         renderOrders();
+    }
+
+    async function saveCatPrice() {
+        if (!adminCat) return;
+        const v = parseInt($("catPriceInput").value, 10);
+        if (!Number.isFinite(v) || v < 0) { adminStatus("Precio inválido", "error"); return; }
+        prices[adminCat] = v;
+        const ok = await persistPrices();
+        if (!ok) { adminStatus("Error al guardar", "error"); return; }
+        adminStatus("Precio actualizado", "success");
+        renderGrids();
+        renderCart();
+        if ($("orderModal").classList.contains("open")) renderOrderSummary();
     }
 
     function renderAdminCats() {
@@ -2952,6 +3056,7 @@
                     '<h4>' + esc(c.name) + '</h4>' +
                     '<p>Editar fotos</p>' +
                     '<span class="cat-count">' + count + ' pieza' + (count === 1 ? '' : 's') + '</span>' +
+                    '<span class="cat-price-badge">' + fmt(priceOf(c.id)) + ' ARS</span>' +
                 '</button>';
         }).join("");
         grid.querySelectorAll("[data-open-cat]").forEach(btn => {
@@ -3139,11 +3244,14 @@
                             '<h5>' + esc(o.name || "Sin nombre") + '</h5>' +
                             '<small>' + date + ' · ' + fmt(o.total) + '</small>' +
                         '</div>' +
-                        '<select class="order-status-select" data-status="' + esc(o.id) + '">' +
-                            '<option value="nuevo"' + (o.status === "nuevo" ? " selected" : "") + '>Nuevo</option>' +
-                            '<option value="visto"' + (o.status === "visto" ? " selected" : "") + '>Visto</option>' +
-                            '<option value="listo"' + (o.status === "listo" ? " selected" : "") + '>Listo</option>' +
-                        '</select>' +
+                        '<div class="order-head-actions">' +
+                            '<select class="order-status-select" data-status="' + esc(o.id) + '">' +
+                                '<option value="nuevo"' + (o.status === "nuevo" ? " selected" : "") + '>Nuevo</option>' +
+                                '<option value="visto"' + (o.status === "visto" ? " selected" : "") + '>Visto</option>' +
+                                '<option value="listo"' + (o.status === "listo" ? " selected" : "") + '>Listo</option>' +
+                            '</select>' +
+                            '<button type="button" class="order-del-btn" data-del-order="' + esc(o.id) + '" title="Eliminar pedido" aria-label="Eliminar pedido">✕</button>' +
+                        '</div>' +
                     '</div>' +
                     '<div class="order-items-list">' +
                         (o.items || []).map(it => '' +
@@ -3172,6 +3280,26 @@
                 adminStatus("Estado actualizado", "success");
             });
         });
+
+        list.querySelectorAll("[data-del-order]").forEach(btn => {
+            btn.addEventListener("click", () => deleteOrder(btn.getAttribute("data-del-order")));
+        });
+    }
+
+    async function deleteOrder(id) {
+        const o = orders.find(x => x.id === id);
+        if (!o) return;
+        const ok = await showConfirm({
+            title: "Eliminar pedido",
+            message: '¿Eliminar el pedido de <strong>' + esc(o.name || "sin nombre") + '</strong>?<br>Esta acción no se puede deshacer.',
+            confirmText: "Eliminar"
+        });
+        if (!ok) return;
+        orders = orders.filter(x => x.id !== id);
+        const saved = await persistOrders();
+        if (!saved) { adminStatus("Error al guardar", "error"); return; }
+        renderOrders();
+        adminStatus("Pedido eliminado", "success");
     }
 
     function showConfirm(opts) {
@@ -3224,9 +3352,7 @@
             if (!cart.length) { ev.preventDefault(); toast("Carrito vacío"); }
         });
 
-        // Order modal
         $("heroOrderBtn").addEventListener("click", openOrderModal);
-        $("sectionOrderBtn").addEventListener("click", openOrderModal);
         $("cartOrderBtn").addEventListener("click", () => { closeCart(); openOrderModal(); });
         $("orderModalClose").addEventListener("click", closeOrderModal);
         $("orderModal").addEventListener("click", ev => { if (ev.target === $("orderModal")) closeOrderModal(); });
@@ -3256,6 +3382,10 @@
         $("workForm").addEventListener("submit", saveWork);
         $("wFile").addEventListener("change", handleFileChange);
         $("cancelEditBtn").addEventListener("click", resetForm);
+        $("saveCatPriceBtn").addEventListener("click", saveCatPrice);
+        $("catPriceInput").addEventListener("keydown", ev => {
+            if (ev.key === "Enter") { ev.preventDefault(); saveCatPrice(); }
+        });
         $("confirmCancelBtn").addEventListener("click", () => closeConfirm(false));
         $("confirmDeleteBtn").addEventListener("click", () => closeConfirm(true));
         $("confirmOverlay").addEventListener("click", ev => { if (ev.target === $("confirmOverlay")) closeConfirm(false); });
