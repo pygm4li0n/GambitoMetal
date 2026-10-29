@@ -2318,28 +2318,50 @@
 
     .mm-fx-particles { position: fixed; inset: 0; z-index: 1; pointer-events: none; width: 100%; height: 100%; display: block; }
 
-    body, body * { cursor: none !important; }
-    .mm-cursor {
-        position: fixed; top: 0; left: 0;
-        width: 18px; height: 18px;
-        border: 1.5px solid var(--laser);
+       /* ══════════ CURSOR LÁSER ══════════ */
+    body.custom-cursor,
+    body.custom-cursor * { cursor: none !important; }
+
+    #sparkCanvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9998;
+    }
+
+    #cursorDot {
+        position: fixed;
+        top: 0; left: 0;
+        width: 8px; height: 8px;
         border-radius: 50%;
+        background: #fff;
         pointer-events: none;
         z-index: 9999;
-        box-shadow: 0 0 14px var(--laser-glow), inset 0 0 8px rgba(255, 90, 90, 0.3);
+        transform: translate3d(-50%, -50%, 0);
+        box-shadow:
+            0 0 5px 1px rgba(255, 230, 230, 0.95),
+            0 0 13px 3px rgba(255, 107, 107, 0.55),
+            0 0 26px 7px rgba(255, 60, 60, 0.16);
         opacity: 0;
-        transition: width 0.22s, height 0.22s, background 0.22s, box-shadow 0.22s, opacity 0.15s;
-        will-change: transform, width, height;
+        transition: width 0.15s ease, height 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+        will-change: transform;
     }
-    .mm-cursor.is-active { opacity: 1; }
-    .mm-cursor.is-hot {
-        width: 46px; height: 46px;
-        background: rgba(255, 90, 90, 0.08);
-        box-shadow: 0 0 30px var(--laser-glow), inset 0 0 18px rgba(255, 90, 90, 0.22);
+    #cursorDot.visible { opacity: 1; }
+    #cursorDot.hot {
+        width: 12px; height: 12px;
+        box-shadow:
+            0 0 8px 2px rgba(255, 230, 230, 1),
+            0 0 22px 6px rgba(255, 107, 107, 0.85),
+            0 0 44px 12px rgba(255, 60, 60, 0.35);
     }
-    @media (hover: none) and (pointer: coarse) {
-        body, body * { cursor: auto !important; }
-        .mm-cursor { display: none !important; }
+
+    /* Touch: apagar todo y devolver cursor nativo */
+    @media (hover: none), (pointer: coarse) {
+        body.custom-cursor,
+        body.custom-cursor * { cursor: auto !important; }
+        #cursorDot, #sparkCanvas { display: none !important; }
     }
     @media (prefers-reduced-motion: reduce) {
         .reveal { opacity: 1; transform: none; transition: none; }
@@ -2351,7 +2373,8 @@
 <body>
 
 <canvas class="mm-fx-particles" id="mm-fx-particles" aria-hidden="true"></canvas>
-<div class="mm-cursor" id="mm-cursor" aria-hidden="true"></div>
+<canvas id="sparkCanvas" aria-hidden="true"></canvas>
+<div id="cursorDot" aria-hidden="true"></div>
 
 <!-- ═══════════ HERO ═══════════ -->
 <section class="hero" aria-label="DAMIÁN NUÑEZ — GAMBITO LÁSER">
@@ -3743,25 +3766,168 @@
 </script>
 
 <script>
-/* Cursor láser */
+/* ══════════ CURSOR LÁSER + CHISPAS ══════════ */
 (function () {
-    'use strict';
-    var cursor = document.getElementById('mm-cursor');
-    if (!cursor) return;
-    if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) return;
-    function move(e) {
-        cursor.style.transform = 'translate3d(' + e.clientX + 'px, ' + e.clientY + 'px, 0) translate(-50%, -50%)';
-        if (!cursor.classList.contains('is-active')) cursor.classList.add('is-active');
+  'use strict';
+
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.body.classList.add('custom-cursor');
+
+  const dot    = document.getElementById('cursorDot');
+  const canvas = document.getElementById('sparkCanvas');
+  if (!dot || !canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const COLORS = ['#ffffff', '#ffddaa', '#ff8844', '#ff3322'];
+  const MAX = 400;
+
+  let W = 0, H = 0, DPR = 1;
+  let sparks = [];
+
+  let mx = innerWidth / 2;
+  let my = innerHeight / 2;
+  let hasPointer = false;
+  let pageVisible = true;
+
+  let accFast = 0;
+  let accSlow = 0;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = innerWidth; H = innerHeight;
+    canvas.width  = W * DPR;
+    canvas.height = H * DPR;
+    canvas.style.width  = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+
+  function activatePointer(x, y) {
+    mx = x; my = y;
+    dot.style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0) translate(-50%,-50%)';
+    if (!hasPointer) {
+      hasPointer = true;
+      dot.classList.add('visible');
     }
-    document.addEventListener('mousemove', move, { passive: true });
-    document.addEventListener('mouseleave', function () { cursor.classList.remove('is-active'); });
-    document.addEventListener('mouseenter', function () { cursor.classList.add('is-active'); });
-    document.addEventListener('mouseover', function (e) {
-        var t = e.target;
-        if (!t || typeof t.closest !== 'function') return;
-        var hot = t.closest('a, button, .work-card, .social-icon, .step, .admin-item, .cart-item, .cart-fab, .work-add, .hero-badge, .admin-cat-card, .cat-nav');
-        cursor.classList.toggle('is-hot', !!hot);
+  }
+
+  function addSpark(x, y, vx, vy, size, decay) {
+    sparks.push({
+      x, y, vx, vy, size, life: 1,
+      color: COLORS[(Math.random() * COLORS.length) | 0],
+      decay
     });
+    if (sparks.length > MAX) sparks.shift();
+  }
+
+  function emitRadial(n, power, sizeRange, decayRange, startOffset) {
+    const offMin = startOffset ? startOffset[0] : 0;
+    const offMax = startOffset ? startOffset[1] : 3;
+    for (let i = 0; i < n; i++) {
+      const a  = Math.random() * Math.PI * 2;
+      const sp = (0.6 + Math.random() * 2.4) * power;
+      const r0 = offMin + Math.random() * (offMax - offMin);
+      addSpark(
+        mx + Math.cos(a) * r0,
+        my + Math.sin(a) * r0,
+        Math.cos(a) * sp,
+        Math.sin(a) * sp,
+        sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]),
+        decayRange[0] + Math.random() * (decayRange[1] - decayRange[0])
+      );
+    }
+  }
+
+  function idleFast() {
+    emitRadial(1 + ((Math.random() * 2) | 0), 1.6,
+      [0.8, 2.2], [0.022, 0.036], [4, 10]);
+  }
+  function idleSlow() {
+    if (Math.random() < 0.6) {
+      emitRadial(1, 2.6, [1.2, 2.6], [0.008, 0.014], [3, 8]);
+    }
+  }
+
+  window.addEventListener('pointermove', function (e) {
+    const dx = e.clientX - mx;
+    const dy = e.clientY - my;
+    activatePointer(e.clientX, e.clientY);
+    const speed = Math.hypot(dx, dy);
+    if (speed > 0.6) {
+      emitRadial(
+        Math.min(6, 1 + Math.floor(speed / 4)),
+        1 + Math.min(speed, 20) * 0.04,
+        [0.6, 2.0], [0.016, 0.032], [0, 3]
+      );
+    }
+  }, { passive: true });
+
+  window.addEventListener('pointerover', function (e) {
+    if (!hasPointer) activatePointer(e.clientX, e.clientY);
+  }, { passive: true });
+
+  setTimeout(function () {
+    if (!hasPointer) activatePointer(innerWidth / 2, innerHeight / 2);
+  }, 1500);
+
+  document.addEventListener('mouseover', function (e) {
+    const t = e.target;
+    if (!t || typeof t.closest !== 'function') return;
+    dot.classList.toggle('hot', !!t.closest('a, button, [role="button"], .work-card, .work-add, .social-icon, .cart-fab, .admin-cat-card, .cat-nav, .step, .admin-item, .cart-item, .hero-badge'));
+  });
+
+  document.addEventListener('mousedown', function () { emitRadial(18, 2.0, [0.6, 2.0], [0.016, 0.032], [0, 3]); });
+  document.addEventListener('mouseup',   function () { emitRadial(8,  1.2, [0.6, 1.8], [0.018, 0.034], [0, 3]); });
+
+  document.addEventListener('visibilitychange', function () {
+    pageVisible = !document.hidden;
+  });
+
+  let last = performance.now();
+  function tick(now) {
+    const dt = Math.min(50, now - last);
+    last = now;
+
+    if (hasPointer && pageVisible) {
+      const fastT = reduced ? 180 : 50;
+      const slowT = reduced ? 500 : 180;
+      accFast += dt;
+      accSlow += dt;
+      if (accFast >= fastT) { accFast = 0; idleFast(); }
+      if (accSlow >= slowT) { accSlow = 0; idleSlow(); }
+    }
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+
+    for (let i = sparks.length - 1; i >= 0; i--) {
+      const s = sparks[i];
+      s.x += s.vx;
+      s.y += s.vy;
+      s.vx *= 0.94;
+      s.vy *= 0.94;
+      s.life -= s.decay;
+      if (s.life <= 0) { sparks.splice(i, 1); continue; }
+
+      const r = s.size * (0.4 + s.life * 0.6);
+      ctx.globalAlpha = s.life * s.life;
+      ctx.fillStyle = s.color;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  requestAnimationFrame(tick);
 })();
 </script>
 
