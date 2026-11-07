@@ -2040,6 +2040,46 @@
     .preview { display: none; margin-top: 10px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
     .preview img { width: 100%; height: auto; }
 
+    /* ── Batch upload ── */
+    .admin-batch {
+        margin-top: 20px;
+        padding-top: 18px;
+        border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    }
+    .admin-batch h4 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        color: var(--laser);
+        margin-bottom: 6px;
+    }
+    .admin-batch p {
+        font-size: 0.78rem;
+        color: var(--muted);
+        line-height: 1.5;
+        margin-bottom: 12px;
+    }
+    #wBatchPreview {
+        display: none;
+        margin-top: 10px;
+        padding: 8px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #0f1116;
+        flex-wrap: wrap;
+        gap: 4px;
+        max-height: 220px;
+        overflow-y: auto;
+    }
+    #wBatchPreview.has { display: flex; }
+    #wBatchPreview img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+    }
+
     .admin-list { display: flex; flex-direction: column; gap: 10px; }
     .admin-item {
         display: flex;
@@ -2725,6 +2765,19 @@
                             <button type="button" id="cancelEditBtn" class="btn-cancel" style="display:none">Cancelar</button>
                         </div>
                     </form>
+
+                    <div class="admin-batch">
+                        <h4>Subir varias imágenes</h4>
+                        <p>Se agregan como “Sin título”. Después podés editarles nombre y descripción.</p>
+                        <input type="file" id="wBatchFile" accept="image/*" multiple hidden>
+                        <label for="wBatchFile" class="upload-btn" id="wBatchBtn">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l4.6 4.6-1.42 1.42L13 6.84V17h-2V6.84L8.82 9.02 7.4 7.6 12 3zM5 19h14v2H5z"/></svg>
+                            <span id="wBatchText">Elegir imágenes</span>
+                        </label>
+                        <small id="wBatchStatus" style="display:block;margin-top:8px;font-size:0.76rem;color:var(--muted);"></small>
+                        <div id="wBatchPreview"></div>
+                        <button type="button" class="btn-save" id="wBatchSaveBtn" style="display:none;width:100%;margin-top:10px;">Subir todas</button>
+                    </div>
                 </div>
                 <div><div class="admin-list" id="adminList"></div></div>
             </div>
@@ -2828,6 +2881,7 @@
     let cart   = [];
     let editingId = null;
     let currentImg = "";
+    let batchImages = [];
     let adminCat = null;
     let adminTab = "catalog";
     let confirmResolver = null;
@@ -3359,6 +3413,7 @@
         $("adminCatTitle").textContent = catName(catId);
         const pi = $("catPriceInput");
         if (pi) pi.value = priceOf(catId);
+             resetBatch();
         resetForm();
         renderAdminItems();
     }
@@ -3516,7 +3571,7 @@
         });
     }
 
-    function handleFileChange(ev) {
+     function handleFileChange(ev) {
         const file = ev.target.files && ev.target.files[0];
         if (!file) return;
         adminStatus("Procesando imagen…", "info");
@@ -3529,6 +3584,96 @@
             $("wFileStatus").textContent = "Lista ✓";
             adminStatus("Imagen lista", "success");
         }).catch(err => adminStatus(err.message || "Error", "error"));
+    }
+
+    function resetBatch() {
+        batchImages = [];
+        const prev = $("wBatchPreview");
+        if (prev) { prev.innerHTML = ""; prev.classList.remove("has"); }
+        if ($("wBatchStatus")) $("wBatchStatus").textContent = "";
+        if ($("wBatchSaveBtn")) $("wBatchSaveBtn").style.display = "none";
+        if ($("wBatchText")) $("wBatchText").textContent = "Elegir imágenes";
+        if ($("wBatchFile")) $("wBatchFile").value = "";
+    }
+
+    function handleBatchFileChange(ev) {
+        const files = ev.target.files;
+        if (!files || !files.length) return;
+        batchImages = [];
+        const prev = $("wBatchPreview");
+        prev.innerHTML = "";
+        prev.classList.add("has");
+        const total = files.length;
+        $("wBatchStatus").textContent = "Procesando " + total + " imagen(es)…";
+        let done = 0;
+
+        Array.from(files).forEach(file => {
+            compressImage(file).then(dataUrl => {
+                batchImages.push(dataUrl);
+                const img = document.createElement("img");
+                img.src = dataUrl;
+                img.alt = "";
+                prev.appendChild(img);
+                done++;
+                if (done === total) {
+                    $("wBatchStatus").textContent = batchImages.length + " imagen(es) lista(s)";
+                    if (batchImages.length) $("wBatchSaveBtn").style.display = "";
+                    $("wBatchText").textContent = "Cambiar selección (" + batchImages.length + ")";
+                }
+            }).catch(err => {
+                done++;
+                adminStatus("Error con " + file.name + ": " + err.message, "error");
+                if (done === total) {
+                    $("wBatchStatus").textContent = batchImages.length + " imagen(es) válida(s)";
+                    if (batchImages.length) $("wBatchSaveBtn").style.display = "";
+                }
+            });
+        });
+
+        ev.target.value = "";
+    }
+
+    async function saveBatch() {
+        if (!batchImages.length) { adminStatus("No hay imágenes", "error"); return; }
+        const btn = $("wBatchSaveBtn");
+        btn.disabled = true;
+        btn.textContent = "Subiendo…";
+
+        const catItems = items.filter(x => x.category === adminCat);
+        let sortCounter = catItems.reduce((m, x) => Math.max(m, x.sort || 0), -1) + 1;
+        let uploaded = 0;
+
+        for (const dataUrl of batchImages) {
+            try {
+                const finalImg = await uploadImage(dataUrl);
+                items.push({
+                    id: uid(),
+                    category: adminCat,
+                    title: "Sin título",
+                    desc: "",
+                    img: finalImg,
+                    sort: sortCounter++
+                });
+                uploaded++;
+            } catch (err) {
+                console.warn("Batch upload error:", err);
+            }
+        }
+
+        btn.disabled = false;
+        btn.textContent = "Subir todas";
+
+        if (uploaded > 0) {
+            await persistItems();
+            adminStatus(uploaded + " pieza(s) agregada(s)", "success");
+            resetBatch();
+            renderAdminItems();
+            renderAdminCats();
+            renderGrids();
+            renderCart();
+        } else {
+            adminStatus("Error subiendo imágenes", "error");
+        }
     }
 
     async function saveWork(ev) {
@@ -3714,8 +3859,10 @@
             });
         });
         $("backToCatsBtn").addEventListener("click", showCatsView);
-        $("workForm").addEventListener("submit", saveWork);
+               $("workForm").addEventListener("submit", saveWork);
         $("wFile").addEventListener("change", handleFileChange);
+        $("wBatchFile").addEventListener("change", handleBatchFileChange);
+        $("wBatchSaveBtn").addEventListener("click", saveBatch);
         $("cancelEditBtn").addEventListener("click", resetForm);
         $("saveCatPriceBtn").addEventListener("click", saveCatPrice);
         $("catPriceInput").addEventListener("keydown", ev => {
