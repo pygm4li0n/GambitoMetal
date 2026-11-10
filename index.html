@@ -770,7 +770,14 @@
         .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 860px) {
-        .hero { min-height: calc(100dvh - 48px); padding-top: 0; padding-left: 8px; padding-right: 8px; }
+        /* FIXED: justify-content flex-start to remove top gap */
+        .hero { 
+            min-height: calc(100dvh - 48px); 
+            padding-top: 16px; 
+            padding-left: 8px; 
+            padding-right: 8px; 
+            justify-content: flex-start; 
+        }
         .hero-split { display: contents; }
         .hero-inner { display: contents; }
         .hero-stage { display: contents; }
