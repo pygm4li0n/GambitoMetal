@@ -139,7 +139,7 @@
         grid-template-columns: 0.9fr 1.1fr;
         gap: clamp(20px, 2.4vw, 40px);
         align-items: center;
-        padding-bottom: 48px;
+        padding-bottom: clamp(18px, 2.6vh, 34px);
     }
     .hero-inner { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
 
@@ -229,11 +229,11 @@
     /* ── STACK DE 3 TARJETAS HORIZONTAL ── */
     .hero-stage { display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative; width: 100%; }
     .cards-stack {
-        --ps: min(260px, 24vw);
+        --ps: min(260px, 24vw, 31vh);
         position: relative;
         width: 100%;
         max-width: 800px;
-        height: 500px;
+        height: min(500px, 56vh);
         perspective: 1400px;
         margin: 0 auto;
         transform: translateY(-10px) translateX(-75px);
@@ -343,10 +343,10 @@
         padding: clamp(80px, 10vw, 130px) clamp(16px, 3vw, 48px);
         position: relative;
     }
-    #tarjetas { padding-top: clamp(36px, 4.5vw, 64px); background: radial-gradient(ellipse 700px 500px at 90% 5%, rgba(255, 90, 90, 0.06), transparent 60%), radial-gradient(ellipse 600px 400px at 10% 95%, rgba(255, 255, 255, 0.02), transparent 60%), var(--brushed), linear-gradient(180deg, #171a20 0%, #12141a 100%); border-top: 1px solid var(--border); }
+    #tarjetas { padding-top: clamp(22px, 2.6vw, 40px); background: radial-gradient(ellipse 700px 500px at 90% 5%, rgba(255, 90, 90, 0.06), transparent 60%), radial-gradient(ellipse 600px 400px at 10% 95%, rgba(255, 255, 255, 0.02), transparent 60%), var(--brushed), linear-gradient(180deg, #171a20 0%, #12141a 100%); border-top: 1px solid var(--border); }
     #pedido { background: radial-gradient(ellipse 700px 400px at 50% 100%, rgba(255, 90, 90, 0.05), transparent 60%), var(--brushed), linear-gradient(180deg, #12141a 0%, #0e1014 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 
-    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: clamp(34px, 4.5vw, 52px); padding-bottom: 18px; border-bottom: 1px solid var(--border); position: relative; }
+    .section-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: clamp(28px, 3.4vw, 46px); padding-bottom: 18px; border-bottom: 1px solid var(--border); position: relative; }
     .section-head::after { content: ""; position: absolute; left: 0; bottom: -1px; width: 120px; height: 2px; background: linear-gradient(90deg, var(--laser), rgba(255, 90, 90, 0.3), transparent); box-shadow: 0 0 14px var(--laser-glow); }
     .eyebrow { font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; color: var(--laser); margin-bottom: 14px; text-shadow: 0 0 14px var(--laser-glow); }
     .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5.5vw, 4.2rem); line-height: 0.9; letter-spacing: 1.5px; background: var(--chrome); background-size: 100% 200%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 1px 0 rgba(0,0,0,0.95)) drop-shadow(0 -1px 0 rgba(255,255,255,0.12)) drop-shadow(0 6px 14px rgba(0,0,0,0.55)); }
@@ -490,13 +490,13 @@
 
     .site-footer { position: relative; background: #080a0e; border-top: 1px solid var(--border); padding: 26px clamp(20px, 4vw, 40px); }
     .site-footer::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--laser), #fff, var(--laser), transparent); opacity: 0.6; }
-    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--soft); }
+    .footer-inner { display: flex; justify-content: center; align-items: center; gap: 14px; flex-wrap: wrap; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--soft); }
     .footer-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .admin-trigger { display: inline-flex; align-items: center; justify-content: center; padding: 10px; }
     .admin-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--laser); box-shadow: 0 0 14px var(--laser-glow); animation: dotPulse 1.8s ease-in-out infinite; }
     @keyframes dotPulse { 0%, 100% { opacity: 0.35; transform: scale(0.85); } 50% { opacity: 1; transform: scale(1.25); } }
 
-    .floating-social { position: fixed; right: 64px; bottom: 216px; z-index: 250; display: flex; flex-direction: column; gap: 12px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(20px) scale(0.92); transition: 0.35s ease; }
+    .floating-social { position: fixed; right: 64px; bottom: 208px; z-index: 250; display: flex; flex-direction: column; gap: 12px; opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(20px) scale(0.92); transition: 0.35s ease; }
     .floating-social.is-visible { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0) scale(1); }
     .social-icon { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: var(--steel-plate); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.28); color: var(--laser); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), inset 0 -1px 0 rgba(0,0,0,0.6), 0 6px 24px rgba(0,0,0,0.65), 0 0 30px rgba(255, 90, 90, 0.28); transition: 0.22s; }
     .social-icon svg { width: 26px; height: 26px; fill: currentColor; }
@@ -592,8 +592,10 @@
     .lb-add-btn svg { width: 14px; height: 14px; stroke: currentColor; stroke-width: 2.5; fill: none; stroke-linecap: round; }
     .lb-add-btn:hover { background: rgba(255, 90, 90, 0.15); border-color: var(--laser); color: var(--white); }
 
+    /* ═══ ORDER MODAL (themed) ═══ */
     .order-modal-inner { position: relative; width: min(92vw, 540px); max-height: 92dvh; display: flex; flex-direction: column; background: var(--steel-plate); border: 1px solid rgba(255, 255, 255, 0.22); border-radius: var(--radius-lg); overflow: hidden; }
-    .order-modal-head { padding: 24px 60px 20px 26px; border-bottom: 1px solid var(--border); }
+    .order-modal-head { padding: 24px 60px 20px 26px; border-bottom: 1px solid var(--border); position: relative; }
+    .order-modal-head::after { content: ""; position: absolute; left: 26px; bottom: -1px; width: 84px; height: 2px; background: linear-gradient(90deg, var(--laser), transparent); box-shadow: 0 0 12px var(--laser-glow); }
     .order-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; background: var(--chrome); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .order-modal-sub { font-size: 0.92rem; color: var(--soft); margin-top: 8px; }
     .order-modal-body { padding: 22px 26px 26px; overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
@@ -608,6 +610,31 @@
     .order-modal-total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 12px; margin-top: 4px; border-top: 1px solid var(--border); }
     .order-modal-total > span:first-child { font-family: 'Space Mono', monospace; font-size: 0.82rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted); }
     .order-modal-total-value { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; background: var(--chrome); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .order-form { display: flex; flex-direction: column; gap: 14px; }
+    .order-field { display: flex; flex-direction: column; gap: 7px; }
+    .order-field label { font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .order-field label span { color: #5f6370; letter-spacing: 1px; }
+    .order-field input,
+    .order-field textarea {
+        width: 100%;
+        background: #12141a;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 13px 15px;
+        color: var(--white);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.94rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .order-field textarea { min-height: 92px; resize: vertical; line-height: 1.5; }
+    .order-field input::placeholder,
+    .order-field textarea::placeholder { color: #5f6370; }
+    .order-field input:focus,
+    .order-field textarea:focus { border-color: rgba(255, 90, 90, 0.6); box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.18); }
+    #submitOrderBtn { width: 100%; margin-top: 4px; padding: 15px 26px; box-shadow: 0 1px 0 rgba(255,255,255,0.7) inset, 0 0 32px rgba(255, 90, 90, 0.36); }
+    #submitOrderBtn:hover { transform: translateY(-2px); box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 0 48px rgba(255, 90, 90, 0.6); }
 
     .login-card { width: 100%; max-width: 400px; padding: 30px 28px; background: var(--steel-plate); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-lg); }
     .login-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; background: var(--chrome); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
@@ -627,8 +654,9 @@
     .btn-cancel { border: 1px solid var(--border); color: var(--soft); font-family: 'Space Mono', monospace; font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 13px 26px; border-radius: 40px; }
 
     .admin-panel { width: 100%; max-width: 1080px; max-height: 92dvh; overflow-y: auto; padding: 28px; background: var(--steel-plate); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: var(--radius-lg); }
-    .admin-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+    .admin-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
     .admin-head h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; background: var(--chrome); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .admin-head small { display: block; margin-top: 4px; font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
     .admin-tabs { display: flex; gap: 4px; margin-bottom: 22px; background: #0f1116; border: 1px solid var(--border); border-radius: 40px; padding: 4px; width: fit-content; flex-wrap: wrap; }
     .admin-tab { padding: 10px 22px; border-radius: 40px; font-family: 'Space Mono', monospace; font-size: 0.78rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); transition: 0.2s; }
     .admin-tab.active { background: rgba(255, 90, 90, 0.15); color: var(--laser); box-shadow: 0 0 14px rgba(255, 90, 90, 0.25); }
@@ -637,13 +665,23 @@
     .admin-status.success { background: var(--accent-soft); border: 1px solid rgba(255, 90, 90, 0.4); color: var(--white); }
     .admin-status.error { background: rgba(255, 77, 77, 0.1); border: 1px solid rgba(255, 77, 77, 0.4); color: #ff8a8a; }
     .admin-status.info { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--soft); }
-    .admin-cats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
-    .admin-cat-card { padding: 26px 24px; background: linear-gradient(135deg, rgba(255, 90, 90, 0.06), transparent 60%), linear-gradient(180deg, #24272f 0%, #1a1d24 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: 0.25s; display: flex; flex-direction: column; gap: 8px; text-align: left; }
+
+    .admin-cat-tools { margin-bottom: 20px; padding: 16px 18px; background: #1c1f26; border: 1px solid var(--border); border-radius: var(--radius); }
+    .admin-tools-label { display: block; margin-bottom: 10px; font-family: 'Space Mono', monospace; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .admin-newcat { display: flex; gap: 10px; flex-wrap: wrap; }
+    .admin-newcat input { flex: 1 1 220px; min-width: 0; background: #171a20; border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.92rem; outline: none; transition: 0.2s; }
+    .admin-newcat input:focus { border-color: rgba(255, 90, 90, 0.6); box-shadow: 0 0 0 3px rgba(255, 90, 90, 0.18); }
+    .admin-newcat .btn-save { padding: 12px 22px; }
+
+    .admin-cats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+    .admin-cat-card { position: relative; padding: 26px 24px; background: linear-gradient(135deg, rgba(255, 90, 90, 0.06), transparent 60%), linear-gradient(180deg, #24272f 0%, #1a1d24 100%); border: 1px solid var(--border); border-radius: var(--radius-lg); cursor: pointer; transition: 0.25s; display: flex; flex-direction: column; gap: 8px; text-align: left; }
     .admin-cat-card:hover { border-color: rgba(255, 90, 90, 0.5); }
-    .admin-cat-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); }
+    .admin-cat-card h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; color: var(--white); padding-right: 34px; }
     .admin-cat-card p { font-family: 'Space Mono', monospace; font-size: 0.76rem; color: var(--muted); text-transform: uppercase; }
     .admin-cat-card .cat-count { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--laser); margin-top: 8px; }
     .admin-cat-card .cat-price-badge { font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--soft); margin-top: 2px; }
+    .admin-cat-del { position: absolute; top: 10px; right: 10px; width: 30px; height: 30px; border-radius: 8px; background: #24272f; border: 1px solid var(--border); color: var(--soft); font-size: 0.8rem; display: flex; align-items: center; justify-content: center; transition: 0.18s; }
+    .admin-cat-del:hover { color: #ff8a8a; border-color: rgba(255, 77, 77, 0.5); }
 
     .admin-items-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
     .admin-back { display: inline-flex; align-items: center; gap: 6px; padding: 10px 18px; border-radius: 40px; border: 1px solid var(--border); color: var(--soft); font-family: 'Space Mono', monospace; font-size: 0.76rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
@@ -724,7 +762,7 @@
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 1100px) {
         .hero-split { grid-template-columns: 1fr 1.2fr; }
-        .cards-stack { --ps: min(200px, 22vw); }
+        .cards-stack { --ps: min(200px, 22vw, 29vh); }
     }
     @media (max-width: 900px) {
         .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -738,8 +776,8 @@
         .hero-nav {
             flex-direction: column-reverse;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 4px;
+            margin-bottom: 12px;
             padding-bottom: 0;
             width: 100%;
             border-bottom: none;
@@ -748,21 +786,21 @@
         .mobile-meta {
             display: inline-block !important;
             text-align: center;
-            font-size: 0.72rem;
-            letter-spacing: 1.5px;
+            font-size: clamp(0.62rem, 2.8vw, 0.74rem);
+            letter-spacing: 1.4px;
             width: 100%;
-            padding-bottom: 12px;
+            padding: 0 6px 8px;
             border-bottom: 1px solid var(--border);
             color: var(--laser);
             text-shadow: 0 0 10px var(--laser-glow);
         }
-        .hero-logo { justify-content: center; font-size: 1.1rem; }
+        .hero-logo { justify-content: center; font-size: 1.05rem; }
         
         .hero-eyebrow { display: none; }
         
         .hero-title {
             order: 1;
-            font-size: clamp(1.5rem, 7.8vw, 2.8rem); /* Título más grande y cerca de los bordes */
+            font-size: clamp(1.5rem, 7.8vw, 2.8rem);
             text-align: center;
             margin-bottom: 20px;
             white-space: nowrap;
@@ -774,7 +812,7 @@
             order: 2;
             height: 240px;
             --ps: min(120px, 30vw);
-            margin-bottom: 24px;
+            margin-bottom: 8px;
             transform: translateY(0) translateX(0);
         }
         .plate-back {
@@ -785,7 +823,7 @@
         }
         .plate-mid {
             left: 50% !important;
-            transform: translate(-50%, -62%) rotate(0deg) !important; /* Carta del medio más arriba */
+            transform: translate(-50%, -62%) rotate(0deg) !important;
             z-index: 3;
         }
         .plate-front {
@@ -805,7 +843,7 @@
         
         .plate-cap {
             order: 3;
-            margin-bottom: 16px; /* Ajuste para que quede justo en el marquee */
+            margin-bottom: 16px;
             transform: translateX(0) !important;
         }
         
@@ -817,7 +855,7 @@
             padding: 0 10px;
         }
         .hero-desc-line1 { white-space: nowrap; display: inline-block; font-size: 0.8rem; }
-        .desktop-br { display: none; }
+        .desktop-br { display: inline; }
         
         .hero-actions {
             order: 5;
@@ -852,8 +890,7 @@
     }
     @media (max-width: 560px) {
         .footer-inner { justify-content: center; font-size: 0.68rem; }
-        .footer-inner > span:last-child { display: none; }
-        .floating-social { right: 22px; bottom: 184px; gap: 10px; }
+        .floating-social { right: 22px; bottom: 170px; gap: 10px; }
         .social-icon { width: 56px; height: 56px; }
         .cart-fab { width: 56px; height: 56px; right: 22px; bottom: 104px; }
         .admin-head { flex-direction: column; align-items: stretch; }
@@ -879,7 +916,7 @@
         <div class="hero-logo">GAMBITO <span class="logo-dot"></span> LÁSER</div>
         <div class="hero-meta">
             <span class="desktop-meta">
-                Buenos Aires - Ezeiza · Envíos internacionales
+                Envíos internacionales
                 <svg class="plane-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </span>
             <span class="mobile-meta">Servicio Profesional de Grabado Láser</span>
@@ -940,48 +977,7 @@
         </div>
     </div>
     <div class="cat-tiles reveal" id="catTiles"></div>
-
-    <div class="cat-block reveal" data-cat="mono" id="cat-mono">
-        <div class="cat-head">
-            <div>
-                <h3 class="cat-title">Monocromáticas <em>B/N</em></h3>
-                <p class="cat-desc">Láser de fibra óptica · Alto contraste · Trabajos personalizados</p>
-            </div>
-        </div>
-        <div class="cat-carousel">
-            <div class="works-grid" id="grid-mono"></div>
-        </div>
-    </div>
-
-    <div class="cat-block reveal" data-cat="presentacion" id="cat-presentacion">
-        <div class="cat-head">
-            <h3 class="cat-title">De presentación <em>branding</em></h3>
-            <p class="cat-desc">Tu logo y datos grabados en acero.</p>
-        </div>
-        <div class="cat-carousel">
-            <div class="works-grid" id="grid-presentacion"></div>
-        </div>
-    </div>
-
-    <div class="cat-block reveal" data-cat="color" id="cat-color">
-        <div class="cat-head">
-            <h3 class="cat-title">Trabajos a color <em>realizados</em></h3>
-            <p class="cat-desc">Piezas ya producidas. Pedí la tuya igual.</p>
-        </div>
-        <div class="cat-carousel">
-            <div class="works-grid" id="grid-color"></div>
-        </div>
-    </div>
-
-    <div class="cat-block reveal" data-cat="armas" id="cat-armas">
-        <div class="cat-head">
-            <h3 class="cat-title">Armas de fuego grabadas</h3>
-            <p class="cat-desc">Grabado láser sobre metal. Piezas de colección, personalizadas al detalle.</p>
-        </div>
-        <div class="cat-carousel">
-            <div class="works-grid" id="grid-armas"></div>
-        </div>
-    </div>
+    <div id="catBlocks"></div>
 </section>
 
 <section id="pedido">
@@ -1005,7 +1001,6 @@
             <span>© <span id="year">2026</span> GAMBITO LÁSER</span>
             <button type="button" class="admin-trigger" id="adminTrigger" aria-label="Panel de administración"><span class="admin-dot"></span></button>
         </div>
-        <span style="display:inline-flex;align-items:center;gap:6px;">Envíos internacionales · Buenos Aires - Ezeiza <svg class="plane-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
     </div>
 </footer>
 
@@ -1093,7 +1088,16 @@
         </div>
         <div class="admin-status" id="adminStatus"></div>
 
-        <div id="viewCats"><div class="admin-cats-grid" id="adminCatsGrid"></div></div>
+        <div id="viewCats">
+            <div class="admin-cat-tools">
+                <label class="admin-tools-label" for="newCatName">Categorías del catálogo</label>
+                <div class="admin-newcat">
+                    <input type="text" id="newCatName" maxlength="40" placeholder="Nombre de la nueva categoría">
+                    <button type="button" id="addCatBtn" class="btn-save">Agregar</button>
+                </div>
+            </div>
+            <div class="admin-cats-grid" id="adminCatsGrid"></div>
+        </div>
 
         <div id="viewItems" style="display:none">
             <div class="admin-items-head">
@@ -1190,10 +1194,19 @@
         <div class="order-modal-body">
             <div class="order-modal-summary" id="orderModalSummary"></div>
             <div class="order-form">
-                <div><label for="orderName">Nombre</label><input type="text" id="orderName" maxlength="60" placeholder="Tu nombre"></div>
-                <div><label for="orderContact">Contacto</label><input type="text" id="orderContact" maxlength="80" placeholder="Tel / email"></div>
-                <div><label for="orderNote">Nota (opcional)</label><textarea id="orderNote" rows="3" maxlength="300" placeholder="Colores, texto, plazos..."></textarea></div>
-                <button type="button" class="btn-save" id="submitOrderBtn" style="width:100%">Enviar pedido</button>
+                <div class="order-field">
+                    <label for="orderName">Nombre</label>
+                    <input type="text" id="orderName" maxlength="60" placeholder="Tu nombre">
+                </div>
+                <div class="order-field">
+                    <label for="orderContact">Contacto</label>
+                    <input type="text" id="orderContact" maxlength="80" placeholder="Teléfono o email">
+                </div>
+                <div class="order-field">
+                    <label for="orderNote">Nota <span>(opcional)</span></label>
+                    <textarea id="orderNote" rows="3" maxlength="300" placeholder="Colores, texto, plazos..."></textarea>
+                </div>
+                <button type="button" class="btn-save" id="submitOrderBtn">Enviar pedido</button>
             </div>
         </div>
     </div>
@@ -1216,6 +1229,7 @@
     const CONTENT_TABLE = "gambito_content";
     const BUCKET = "gambito";
     const FOLDER = "laser";
+    const KEY_CATS = "laser_cats_v1";
     const KEY_ITEMS = "laser_items_v1";
     const KEY_ORDERS = "laser_orders_v1";
     const KEY_PRICES = "laser_prices_v1";
@@ -1225,22 +1239,25 @@
     const MAX_IMG_W = 900;
     const JPEG_Q = 0.8;
 
-    const CATS = [
-        { id: "mono", name: "Tarjetas monocromáticas", short: "Monocromáticas" },
-        { id: "presentacion", name: "Tarjetas de presentación", short: "Presentación" },
-        { id: "color", name: "Tarjetas a color", short: "A color" },
-        { id: "armas", name: "Armas de fuego grabadas", short: "Armas" }
+    const DEFAULT_CATS = [
+        { id: "mono", name: "Monocromáticas", short: "Monocromáticas", desc: "Láser de fibra óptica · Alto contraste · Trabajos personalizados" },
+        { id: "presentacion", name: "De presentación", short: "Presentación", desc: "Tu logo y datos grabados en acero." },
+        { id: "color", name: "Trabajos a color", short: "A color", desc: "Piezas ya producidas. Pedí la tuya igual." },
+        { id: "armas", name: "Armas grabadas", short: "Armas", desc: "Grabado láser sobre metal. Piezas de colección." }
     ];
-    function catName(id) { var c = CATS.find(x => x.id === id); return c ? c.name : id; }
+    let cats = DEFAULT_CATS.map(c => ({ ...c }));
 
     let sb = null;
     if (window.supabase && window.supabase.createClient) {
         try { sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch (err) { console.warn("Supabase init:", err); }
     }
     let items = [], orders = [], prices = {};
-    CATS.forEach(c => { prices[c.id] = DEFAULT_PRICES[c.id] || DEFAULT_PRICE; });
+    DEFAULT_CATS.forEach(c => { prices[c.id] = DEFAULT_PRICES[c.id] || DEFAULT_PRICE; });
     let heroData = { c1: "", c2: "", c3: "" };
-    function priceOf(catId) { return prices[catId] || DEFAULT_PRICES[catId] || DEFAULT_PRICE; }
+    function priceOf(catId) {
+        const p = Number(prices[catId]);
+        return Number.isFinite(p) && p >= 0 ? p : DEFAULT_PRICE;
+    }
     let cart = [], editingId = null, currentImg = "", batchImages = [], adminCat = null, confirmResolver = null, lbCurrent = null, toastTimer = null;
 
     const $ = id => document.getElementById(id);
@@ -1248,6 +1265,29 @@
     const fmt = n => "$" + Number(n || 0).toLocaleString("es-AR");
     const waLink = t => "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(t);
     function uid() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+    function catName(id) { var c = cats.find(x => x.id === id); return c ? c.name : id; }
+
+    function sanitizeCats(raw) {
+        if (Array.isArray(raw) && raw.length) {
+            const seen = new Set();
+            const out = [];
+            raw.forEach(c => {
+                if (!c || typeof c !== "object") return;
+                const id = String(c.id || "").trim();
+                const name = String(c.name || "").trim();
+                if (!id || !name || seen.has(id)) return;
+                seen.add(id);
+                out.push({
+                    id: id,
+                    name: name,
+                    short: String(c.short || name).trim() || name,
+                    desc: String(c.desc || "Trabajos personalizados")
+                });
+            });
+            if (out.length) return out;
+        }
+        return DEFAULT_CATS.map(c => ({ ...c }));
+    }
 
     function svgPlaceholder(title, sub, hue) {
         title = (title || "G").slice(0, 3);
@@ -1292,17 +1332,30 @@
     }
 
     async function loadAll() {
-        const [rawItems, rawOrders, rawPrices, rawHero] = await Promise.all([
+        const [rawCats, rawItems, rawOrders, rawPrices, rawHero] = await Promise.all([
+            loadContent(KEY_CATS, null),
             loadContent(KEY_ITEMS, null),
             loadContent(KEY_ORDERS, null),
             loadContent(KEY_PRICES, null),
             loadContent(KEY_HERO, null)
         ]);
-        if (Array.isArray(rawItems) && rawItems.length) items = rawItems; else items = defaultItems();
+        cats = sanitizeCats(rawCats);
+        if (rawPrices && typeof rawPrices === "object") {
+            Object.keys(rawPrices).forEach(k => {
+                const p = Number(rawPrices[k]);
+                if (Number.isFinite(p) && p >= 0) prices[k] = p;
+            });
+        }
+        cats.forEach(c => { if (!Number.isFinite(Number(prices[c.id]))) prices[c.id] = DEFAULT_PRICE; });
+        if (Array.isArray(rawItems) && rawItems.length) {
+            items = rawItems.filter(it => it && cats.some(c => c.id === it.category));
+        } else {
+            items = defaultItems().filter(it => cats.some(c => c.id === it.category));
+        }
         orders = Array.isArray(rawOrders) ? rawOrders : [];
-        if (rawPrices && typeof rawPrices === "object") { CATS.forEach(c => { const p = Number(rawPrices[c.id]); prices[c.id] = Number.isFinite(p) && p >= 0 ? p : (DEFAULT_PRICES[c.id] || DEFAULT_PRICE); }); }
         if (rawHero && typeof rawHero === "object") heroData = { c1: rawHero.c1 || "", c2: rawHero.c2 || "", c3: rawHero.c3 || "" };
     }
+    function persistCats()   { return saveContent(KEY_CATS, cats); }
     function persistItems()  { return saveContent(KEY_ITEMS, items); }
     function persistOrders() { return saveContent(KEY_ORDERS, orders); }
     function persistPrices() { return saveContent(KEY_PRICES, prices); }
@@ -1436,7 +1489,7 @@
 
     function renderCatTiles() {
         const el = $("catTiles"); if (!el) return;
-        el.innerHTML = CATS.map(c => {
+        el.innerHTML = cats.map(c => {
             const first = items.filter(x => x.category === c.id).sort((a, b) => (a.sort || 0) - (b.sort || 0))[0];
             const bg = first && first.img ? ' style="background-image:url(\'' + esc(first.img) + '\')"' : '';
             const promo = c.id === "mono" ? '<span class="cat-promo">PROMOCIÓN</span>' : '';
@@ -1444,11 +1497,27 @@
         }).join("");
     }
 
+    function renderCatBlocks() {
+        const wrap = $("catBlocks");
+        if (!wrap) return;
+        wrap.innerHTML = cats.map(c => {
+            const promo = c.id === "mono" ? '<div class="promo-badge"><span class="promo-flash">PROMO</span></div>' : '';
+            return '<div class="cat-block" data-cat="' + esc(c.id) + '" id="cat-' + esc(c.id) + '">'
+                + '<div class="cat-head"><div>'
+                + '<h3 class="cat-title">' + esc(c.name) + '</h3>'
+                + '<p class="cat-desc">' + esc(c.desc || "Trabajos personalizados") + '</p>'
+                + '</div>' + promo + '</div>'
+                + '<div class="cat-carousel"><div class="works-grid" id="grid-' + esc(c.id) + '"></div></div>'
+                + '</div>';
+        }).join("");
+    }
+
     function renderGrids() {
+        renderCatBlocks();
         renderCatTiles();
-        CATS.forEach(c => {
+        cats.forEach(c => {
             const grid = $("grid-" + c.id); if (!grid) return;
-            const list = items.filter(x => x.category === c.id).sort((a, b) => (a.sort || 0) - (b.sort || 0)).slice(1);
+            const list = items.filter(x => x.category === c.id).sort((a, b) => (a.sort || 0) - (b.sort || 0));
             if (!list.length) { grid.innerHTML = '<div class="works-empty">Próximamente</div>'; return; }
             grid.innerHTML = list.map(w => {
                 const inCart = cart.some(i => i.id === w.id);
@@ -1548,13 +1617,66 @@
         if ($("orderModal").classList.contains("open")) renderOrderSummary();
     }
 
+    async function addCategory() {
+        const input = $("newCatName");
+        if (!input) return;
+        const name = input.value.trim();
+        if (!name) { adminStatus("Escribí un nombre", "error"); input.focus(); return; }
+        if (cats.some(c => c.name.toLowerCase() === name.toLowerCase())) { adminStatus("Esa categoría ya existe", "error"); input.focus(); return; }
+        const id = "cat_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+        const short = name.length > 14 ? name.slice(0, 12).trim() + "…" : name;
+        cats.push({ id: id, name: name, short: short, desc: "Trabajos personalizados" });
+        prices[id] = DEFAULT_PRICE;
+        const okC = await persistCats();
+        await persistPrices();
+        if (!okC) { adminStatus("Error al guardar", "error"); return; }
+        input.value = "";
+        renderAdminCats(); renderGrids(); renderCart();
+        adminStatus("Categoría agregada", "success");
+    }
+
+    async function deleteCategory(id) {
+        const c = cats.find(x => x.id === id); if (!c) return;
+        const count = items.filter(x => x.category === id).length;
+        const ok = await showConfirm({
+            title: "Eliminar categoría",
+            message: '¿Eliminar <strong>"' + esc(c.name) + '"</strong>' + (count ? ' y sus ' + count + ' pieza(s)' : '') + '?',
+            confirmText: "Eliminar"
+        });
+        if (!ok) return;
+        cats = cats.filter(x => x.id !== id);
+        items = items.filter(x => x.category !== id);
+        delete prices[id];
+        cart = cart.filter(i => items.some(x => x.id === i.id));
+        saveCart();
+        const okC = await persistCats();
+        const okI = await persistItems();
+        await persistPrices();
+        if (!okC || !okI) { adminStatus("Error al guardar", "error"); return; }
+        if (adminCat === id) showCatsView();
+        renderAdminCats(); renderGrids(); renderCart(); updateBadge();
+        adminStatus("Categoría eliminada", "success");
+    }
+
     function renderAdminCats() {
         const grid = $("adminCatsGrid");
-        grid.innerHTML = CATS.map(c => {
+        grid.innerHTML = cats.map(c => {
             const count = items.filter(x => x.category === c.id).length;
-            return '<button type="button" class="admin-cat-card" data-open-cat="' + c.id + '"><h4>' + esc(c.name) + '</h4><p>Editar fotos</p><span class="cat-count">' + count + ' pieza' + (count === 1 ? '' : 's') + '</span><span class="cat-price-badge">' + fmt(priceOf(c.id)) + ' ARS</span></button>';
+            return '<div class="admin-cat-card" data-open-cat="' + esc(c.id) + '">'
+                + '<button type="button" class="admin-cat-del" data-del-cat="' + esc(c.id) + '" aria-label="Eliminar categoría">✕</button>'
+                + '<h4>' + esc(c.name) + '</h4><p>Editar fotos</p>'
+                + '<span class="cat-count">' + count + ' pieza' + (count === 1 ? '' : 's') + '</span>'
+                + '<span class="cat-price-badge">' + fmt(priceOf(c.id)) + ' ARS</span>'
+                + '</div>';
         }).join("");
-        grid.querySelectorAll("[data-open-cat]").forEach(btn => btn.addEventListener("click", () => showItemsView(btn.getAttribute("data-open-cat"))));
+        grid.querySelectorAll("[data-open-cat]").forEach(el => el.addEventListener("click", ev => {
+            if (ev.target.closest("[data-del-cat]")) return;
+            showItemsView(el.getAttribute("data-open-cat"));
+        }));
+        grid.querySelectorAll("[data-del-cat]").forEach(b => b.addEventListener("click", ev => {
+            ev.stopPropagation();
+            deleteCategory(b.getAttribute("data-del-cat"));
+        }));
     }
 
     function renderAdminItems() {
@@ -1659,6 +1781,7 @@
 
     async function saveWork(ev) {
         ev.preventDefault();
+        if (!adminCat) return;
         const title = $("wTitle").value.trim(), desc = $("wDesc").value.trim();
         if (!currentImg) { adminStatus("Subí una imagen", "error"); return; }
         const btn = $("saveBtn"); btn.disabled = true; btn.textContent = "Guardando…";
@@ -1766,6 +1889,11 @@
         $("confirmCancelBtn").addEventListener("click", () => closeConfirm(false));
         $("confirmDeleteBtn").addEventListener("click", () => closeConfirm(true));
         $("confirmOverlay").addEventListener("click", ev => { if (ev.target === $("confirmOverlay")) closeConfirm(false); });
+
+        const addCatBtn = $("addCatBtn");
+        if (addCatBtn) addCatBtn.addEventListener("click", addCategory);
+        const newCatInput = $("newCatName");
+        if (newCatInput) newCatInput.addEventListener("keydown", ev => { if (ev.key === "Enter") { ev.preventDefault(); addCategory(); } });
 
         ["1","2","3"].forEach(n => {
             const inp = document.getElementById("heroFile" + n);
