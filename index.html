@@ -263,14 +263,15 @@
         to { --angle: 360deg; }
     }
 
-    .plate-back  { left: 0;   transform: translateY(-45%) rotate(-12deg); z-index: 1; }
+    /* Desktop: leve superposición, como antes */
+    .plate-back  { left: 0;   transform: translate(11%, -45%) rotate(-12deg); z-index: 1; }
     .plate-mid   { left: 50%; transform: translate(-50%, -50%) rotate(0deg); z-index: 3; }
-    .plate-front { left: 100%; transform: translate(-100%, -45%) rotate(12deg); z-index: 2; }
+    .plate-front { left: 100%; transform: translate(-111%, -45%) rotate(12deg); z-index: 2; }
 
     .plate:hover { z-index: 20 !important; }
-    .plate-back:hover  { transform: translateY(-49%) rotate(-8deg)  scale(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 0 rgba(0,0,0,0.4), 0 40px 80px rgba(0,0,0,0.9), 0 0 120px rgba(255, 90, 90, 0.35); }
+    .plate-back:hover  { transform: translate(11%, -49%) rotate(-8deg)  scale(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 0 rgba(0,0,0,0.4), 0 40px 80px rgba(0,0,0,0.9), 0 0 120px rgba(255, 90, 90, 0.35); }
     .plate-mid:hover   { transform: translate(-50%, -54%) rotate(0deg) scale(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 0 rgba(0,0,0,0.4), 0 40px 80px rgba(0,0,0,0.9), 0 0 120px rgba(255, 90, 90, 0.35); }
-    .plate-front:hover { transform: translate(-100%, -49%) rotate(8deg)   scale(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 0 rgba(0,0,0,0.4), 0 40px 80px rgba(0,0,0,0.9), 0 0 120px rgba(255, 90, 90, 0.35); }
+    .plate-front:hover { transform: translate(-111%, -49%) rotate(8deg)   scale(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), inset 0 -2px 0 rgba(0,0,0,0.4), 0 40px 80px rgba(0,0,0,0.9), 0 0 120px rgba(255, 90, 90, 0.35); }
 
     .plate-eng {
         position: absolute; inset: 0;
@@ -768,7 +769,7 @@
         .works-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 860px) {
-        .hero { min-height: calc(100dvh - 48px); padding-top: 0; padding-left: 8px; padding-right: 8px; }
+        .hero { min-height: calc(100dvh - 48px); padding-top: 2px; padding-left: 8px; padding-right: 8px; }
         .hero-split { display: contents; }
         .hero-inner { display: contents; }
         .hero-stage { display: contents; }
@@ -776,8 +777,8 @@
         .hero-nav {
             flex-direction: column-reverse;
             align-items: center;
-            gap: 4px;
-            margin-bottom: 12px;
+            gap: 2px;
+            margin-bottom: 8px;
             padding-bottom: 0;
             width: 100%;
             border-bottom: none;
@@ -786,15 +787,15 @@
         .mobile-meta {
             display: inline-block !important;
             text-align: center;
-            font-size: clamp(0.62rem, 2.8vw, 0.74rem);
-            letter-spacing: 1.4px;
+            font-size: clamp(0.66rem, 3vw, 0.76rem);
+            letter-spacing: 1.6px;
             width: 100%;
-            padding: 0 6px 8px;
+            padding: 0 6px 6px;
             border-bottom: 1px solid var(--border);
             color: var(--laser);
             text-shadow: 0 0 10px var(--laser-glow);
         }
-        .hero-logo { justify-content: center; font-size: 1.05rem; }
+        .hero-logo { justify-content: center; font-size: 1rem; }
         
         .hero-eyebrow { display: none; }
         
@@ -802,7 +803,7 @@
             order: 1;
             font-size: clamp(1.5rem, 7.8vw, 2.8rem);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
             white-space: nowrap;
         }
         .hero-title br { display: none; }
@@ -812,7 +813,7 @@
             order: 2;
             height: 240px;
             --ps: min(120px, 30vw);
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             transform: translateY(0) translateX(0);
         }
         .plate-back {
@@ -843,7 +844,7 @@
         
         .plate-cap {
             order: 3;
-            margin-bottom: 16px;
+            margin-bottom: 10px;
             transform: translateX(0) !important;
         }
         
@@ -851,7 +852,7 @@
             order: 4;
             text-align: center;
             font-size: 0.85rem;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
             padding: 0 10px;
         }
         .hero-desc-line1 { white-space: nowrap; display: inline-block; font-size: 0.8rem; }
@@ -864,7 +865,7 @@
             flex-wrap: wrap;
             gap: 8px;
             width: calc(100% - 32px);
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
         .hero-actions .btn-primary,
         .hero-actions .btn-order,
@@ -876,6 +877,12 @@
         .btn-consultar { display: none !important; }
         
         .mobile-buttons { display: none !important; }
+
+        /* Footer mobile: más corto y texto un poco más grande */
+        .site-footer { padding: 12px 18px; }
+        .footer-inner { justify-content: center; font-size: 0.76rem; letter-spacing: 1.6px; gap: 10px; }
+        .footer-left { gap: 10px; }
+        .admin-trigger { padding: 6px; }
     }
     @media (max-width: 720px) {
         .cat-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -889,7 +896,7 @@
         .section-desc { text-align: left; }
     }
     @media (max-width: 560px) {
-        .footer-inner { justify-content: center; font-size: 0.68rem; }
+        .footer-inner { font-size: 0.74rem; }
         .floating-social { right: 22px; bottom: 170px; gap: 10px; }
         .social-icon { width: 56px; height: 56px; }
         .cart-fab { width: 56px; height: 56px; right: 22px; bottom: 104px; }
@@ -916,7 +923,7 @@
         <div class="hero-logo">GAMBITO <span class="logo-dot"></span> LÁSER</div>
         <div class="hero-meta">
             <span class="desktop-meta">
-                Envíos internacionales
+                Buenos Aires - Ezeiza · Envíos internacionales
                 <svg class="plane-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </span>
             <span class="mobile-meta">Servicio Profesional de Grabado Láser</span>
