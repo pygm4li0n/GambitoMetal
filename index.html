@@ -774,7 +774,7 @@
         .hero { 
     min-height: calc(100dvh - 48px); 
     padding: 14px 8px 22px; 
-    justify-content: space-between; 
+    justify-content: flex-start;
 }
         .hero-split { display: contents; }
         .hero-inner { display: contents; }
@@ -783,8 +783,8 @@
         .hero-nav {
             flex-direction: column-reverse;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 14px;
+            gap: 16px;
+            margin-bottom: 16px;
             padding-bottom: 0;
             width: 100%;
             border-bottom: none;
@@ -801,17 +801,23 @@
             color: var(--laser);
             text-shadow: 0 0 10px var(--laser-glow);
         }
-        .hero-logo { justify-content: center; font-size: 1rem; }
+        .hero-logo { 
+    justify-content: center; 
+    font-size: 1.15rem;      /* más grande */
+    letter-spacing: 2.5px;
+    line-height: 1;
+}
         
         .hero-eyebrow { display: none; }
         
         .hero-title {
-            order: 1;
-            font-size: clamp(1.5rem, 7.8vw, 2.8rem);
-            text-align: center;
-            margin-bottom: 12px;
-            white-space: nowrap;
-        }
+    order: 1;
+    font-size: clamp(1.5rem, 7.8vw, 2.8rem);
+    text-align: center;
+    margin-bottom: 12px;
+    white-space: nowrap;
+    padding-top: 0; /* ← elimina el padding base que desbalanceaba */
+}
         .hero-title br { display: none; }
         .hero-title .outline { -webkit-text-stroke-width: 1px; }
         
@@ -864,13 +870,14 @@
         .hero-desc-line1 { white-space: nowrap; display: inline-block; font-size: 0.8rem; }
         .desktop-br { display: inline; }
         
-        .hero-actions {
+               .hero-actions {
             order: 5;
             display: flex !important;
             justify-content: center;
             flex-wrap: wrap;
             gap: 8px;
             width: calc(100% - 32px);
+            margin-top: auto;
             margin-bottom: 0;
         }
         .hero-actions .btn-primary,
