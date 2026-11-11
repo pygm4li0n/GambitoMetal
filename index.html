@@ -774,36 +774,31 @@
         .hero { 
     min-height: calc(100dvh - 48px); 
     padding: 14px 8px 22px; 
-    justify-content: flex-start;
+    justify-content: space-between;
 }
         .hero-split { display: contents; }
         .hero-inner { display: contents; }
         .hero-stage { display: contents; }
         
-        .hero-nav {
-            flex-direction: column-reverse;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 16px;
-            padding-bottom: 0;
-            width: 100%;
-            border-bottom: none;
-        }
+        .hero-nav { display: contents; }
+        .hero-meta { display: contents; }
         .desktop-meta { display: none !important; }
         .mobile-meta {
-            display: inline-block !important;
-            text-align: center;
-            font-size: clamp(0.66rem, 3vw, 0.76rem);
-            letter-spacing: 1.6px;
-            width: 100%;
-            padding: 0 6px;
-            border-bottom: none;
-            color: var(--laser);
-            text-shadow: 0 0 10px var(--laser-glow);
-        }
+    display: block !important;
+    order: 1;
+    text-align: center;
+    font-size: clamp(0.66rem, 3vw, 0.76rem);
+    letter-spacing: 1.6px;
+    width: 100%;
+    padding: 0 6px;
+    border-bottom: none;
+    color: var(--laser);
+    text-shadow: 0 0 10px var(--laser-glow);
+}
         .hero-logo { 
+    order: 2;
     justify-content: center; 
-    font-size: 1.15rem;      /* más grande */
+    font-size: 1.15rem;
     letter-spacing: 2.5px;
     line-height: 1;
 }
@@ -811,21 +806,21 @@
         .hero-eyebrow { display: none; }
         
         .hero-title {
-    order: 1;
+    order: 3;
     font-size: clamp(1.5rem, 7.8vw, 2.8rem);
     text-align: center;
-    margin-bottom: 12px;
+    margin-bottom: 0;
     white-space: nowrap;
-    padding-top: 0; /* ← elimina el padding base que desbalanceaba */
+    padding-top: 0;
 }
         .hero-title br { display: none; }
         .hero-title .outline { -webkit-text-stroke-width: 1px; }
         
         .cards-stack {
-            order: 2;
+            order: 4;
             height: 240px;
             --ps: min(120px, 30vw);
-            margin-bottom: 6px;
+            margin-bottom: 0;
             transform: translateY(0) translateX(0);
         }
         .plate-back {
@@ -855,29 +850,28 @@
         }
         
         .plate-cap {
-            order: 3;
-            margin-bottom: 8px;
+            order: 5;
+            margin-bottom: 0;
             transform: translateX(0) !important;
         }
         
         .hero-desc {
-            order: 4;
+            order: 6;
             text-align: center;
             font-size: 0.85rem;
-            margin-bottom: 18px;
+            margin-bottom: 0;
             padding: 0 10px;
         }
         .hero-desc-line1 { white-space: nowrap; display: inline-block; font-size: 0.8rem; }
         .desktop-br { display: inline; }
         
-               .hero-actions {
-            order: 5;
+        .hero-actions {
+            order: 7;
             display: flex !important;
             justify-content: center;
             flex-wrap: wrap;
             gap: 8px;
             width: calc(100% - 32px);
-            margin-top: auto;
             margin-bottom: 0;
         }
         .hero-actions .btn-primary,
