@@ -772,10 +772,10 @@
     @media (max-width: 860px) {
         /* FIXED: justify-content flex-start to remove top gap */
         .hero { 
-            min-height: 0; 
-            padding: 14px 8px 22px; 
-            justify-content: flex-start; 
-        }
+    min-height: calc(100dvh - 48px); 
+    padding: 14px 8px 22px; 
+    justify-content: space-between; 
+}
         .hero-split { display: contents; }
         .hero-inner { display: contents; }
         .hero-stage { display: contents; }
